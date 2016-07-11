@@ -16,6 +16,7 @@ db.knex.schema.hasTable('photos').then(function(exists) {
   if (!exists) {
     db.knex.schema.createTable('photos', function (photo) {
       photo.increments('id').primary();
+      photo.string('flickr_id').unique();
       photo.string('url', 255);
       photo.string('description', 255);
       photo.timestamps();

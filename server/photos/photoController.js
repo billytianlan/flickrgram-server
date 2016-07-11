@@ -1,6 +1,6 @@
-var Photo = require('./photoModel.js');
+let Photo = require('./photoModel.js');
 
-var getAllPhotos = (req, res) => {
+let getAllPhotos = (req, res) => {
   console.log('inside the photo controller');
   res.status(200).send();
 }
