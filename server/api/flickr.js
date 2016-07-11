@@ -4,7 +4,7 @@ let Photos = require('../photos/photosCollection');
 let _ = require('underscore');
 require('dotenv').config();
 
-let scrapeFlickr = (key) => {
+let connectFlickr = (key) => {
 
   let options = {
     'method': 'GET',
@@ -44,5 +44,5 @@ let scrapeFlickr = (key) => {
   });
 }
 
-scrapeFlickr(process.env.FLICKR_KEY)
+connectFlickr(process.env.FLICKR_KEY)
 
