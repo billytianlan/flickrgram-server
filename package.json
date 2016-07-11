@@ -1,0 +1,27 @@
+{
+  "name": "flickrgram-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billytianlan/flickrgram-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billytianlan/flickrgram-server/issues"
+  },
+  "homepage": "https://github.com/billytianlan/flickrgram-server#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "request": "^2.73.0",
+    "underscore": "^1.8.3"
+  }
+}
