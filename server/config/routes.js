@@ -1,10 +1,7 @@
-var router = (app, express) => {
+var photosController = require('../photos/photoController');
 
-
-  app.get('/', (req, res) => {
-    console.log('in the root');
-    res.status(200).send();
-  })
+var router = (app) => {
+  app.get('/api/photos', photosController.getAllPhotos)
   // app.get('/:code', linksController.navToLink);
 
   // app.post('/api/users/signin', userController.signin);
