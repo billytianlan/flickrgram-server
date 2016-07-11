@@ -36,6 +36,8 @@ let scrapeFlickr = (key) => {
           .then((newPhoto) => {
             console.log('saved new photo', newPhoto.id);
           })
+        } else {
+          console.log('We already have this photo');
         }
       })
     })

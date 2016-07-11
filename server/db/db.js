@@ -21,7 +21,7 @@ db.knex.schema.hasTable('photos').then(function(exists) {
       photo.string('description', 255);
       photo.timestamps();
     }).then(function (table) {
-      console.log('Created Table', table);
+      console.log('Created Table Photos', table);
     });
   }
 });
@@ -34,7 +34,7 @@ db.knex.schema.hasTable('users').then(function(exists) {
       user.string('password', 255)
       user.timestamps();
     }).then(function (table) {
-      console.log('Created Table', table);
+      console.log('Created Table Users', table);
     });
   }
 });
@@ -47,7 +47,7 @@ db.knex.schema.hasTable('likes').then(function(exists) {
       like.integer('photo_id').references('photos.id');
       like.timestamps();
     }).then(function (table) {
-      console.log('Created Table', table);
+      console.log('Created Table Likes', table);
     });
   }
 });
@@ -59,20 +59,20 @@ db.knex.schema.hasTable('tags').then(function(exists) {
       tag.string('name', 255).unique();
       tag.timestamps();
     }).then(function (table) {
-      console.log('Created Table', table);
+      console.log('Created Table Tags', table);
     });
   }
 });
 
 db.knex.schema.hasTable('photos_tags').then(function(exists) {
   if (!exists) {
-    db.knex.schema.createTable('photos_tags', function (table) {
-      table.increments('id').primary();
-      table.integer('photo_id').references('photos.id');
-      table.integer('tag_id').references('tags.id');
-      table.timestamps();
+    db.knex.schema.createTable('photos_tags', function (photos_tags) {
+      photos_tags.increments('id').primary();
+      photos_tags.integer('photo_id')
+      photos_tags.integer('tag_id')
+      photos_tags.timestamps();
     }).then(function (table) {
-      console.log('Created Table', table);
+      console.log('Created Table Photos Tags', table);
     });
   }
 });
