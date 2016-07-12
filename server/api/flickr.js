@@ -1,7 +1,6 @@
 let request = require('request');
-let Photo = require('../photos/photoModel');
-let Photos = require('../photos/photosCollection');
 let _ = require('underscore');
+let Photo = require('../db/db').Photo
 require('dotenv').config();
 
 let connectFlickr = (key) => {
@@ -19,23 +18,18 @@ let connectFlickr = (key) => {
 
   request(options, (err, res, body) => {
     let photosArray = JSON.parse(body).photos.photo;
-
     _.each(photosArray, (photo) => {
       let url = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
-      new Photo({
-        flickr_id: photo.id
+      Photo.findOrCreate({ 
+        where: {
+          flickr_id: photo.id,
+          url: url,
+          description: photo.title
+        }
       })
-      .fetch()
-      .then((model) => {
-        if (!model) {
-          Photos.create({
-            flickr_id: photo.id,
-            url: url,
-            description: photo.title,
-          })
-          .then((newPhoto) => {
-            console.log('saved new photo', newPhoto.id);
-          })
+      .spread((photo, created) => {
+        if (created) {
+          console.log('New photo added', photo.id);
         } else {
           console.log('We already have this photo');
         }

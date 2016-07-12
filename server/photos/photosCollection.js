@@ -1,8 +1,8 @@
-var db = require('../db/db');
-var Photo = require('./photoModel');
+// var db = require('../db/db');
+// var Photo = require('./photoModel');
 
-var Photos = new db.Collection();
+// var Photos = new db.Collection();
 
-Photos.model = Photo;
+// Photos.model = Photo;
 
-module.exports = Photos;
+// module.exports = Photos;

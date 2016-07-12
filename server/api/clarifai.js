@@ -1,24 +1,20 @@
 let request = require('request');
-let Photo = require('../photos/photoModel');
-let Photos = require('../photos/photosCollection');
-let Tag = require('../tags/tagModel');
-let Tags = require('../tags/tagsCollection');
+let Photo = require('../db/db').Photo
+let Tag = require('../db/db').Tag
 let _ = require('underscore');
 require('dotenv').config();
 
 
 console.log(process.env.CLARIFAI_KEY);
 let connectClarifai = (key) => {
-  Photo.fetchAll()
+  Photo.findAll()
   .then((photos) => {
-    photos = photos.slice()
     _.each(photos, function(photo) {
-      console.log(photo.attributes);
       let options = {
         'method': 'GET',
         'url': 'https://api.clarifai.com/v1/tag/',
         'qs': {
-          'url': photo.attributes.url
+          'url': photo.get('url')
         },
         'headers': {
           'Authorization': `Bearer ${key}`
@@ -29,7 +25,7 @@ let connectClarifai = (key) => {
         let tagsArray = body.results[0].result.tag.classes;
 
         _.each(tagsArray, (tag) => {
-          new Tag({
+          Tag.findOrCreate({
             name: tag
           })
           .fetch()
