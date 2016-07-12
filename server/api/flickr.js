@@ -1,6 +1,7 @@
 let request = require('request');
 let _ = require('underscore');
 let Photo = require('../db/db').Photo
+let clarifai = require('./clarifai');
 require('dotenv').config();
 
 let connectFlickr = (key) => {
@@ -29,6 +30,7 @@ let connectFlickr = (key) => {
       })
       .spread((photo, created) => {
         if (created) {
+          clarifai.connectClarifai(process.env.CLARIFAI_KEY, photo)
           console.log('New photo added', photo.id);
         } else {
           console.log('We already have this photo');
