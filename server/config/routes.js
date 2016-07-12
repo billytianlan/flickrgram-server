@@ -1,7 +1,9 @@
 var photosController = require('../photos/photoController');
+var tagsController = require('../tags/tagController');
 
 var router = (app) => {
   app.get('/api/photos', photosController.getAllPhotos)
+  app.get('/api/tags', tagsController.findTags)
   // app.get('/:code', linksController.navToLink);
 
   // app.post('/api/users/signin', userController.signin);

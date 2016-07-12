@@ -1,5 +1,3 @@
-// let Photo = require('./photoModel');
-// let Photos = require('./photosCollection');
 let Photo = require('../db/db').Photo
 
 let getAllPhotos = (req, res) => {
