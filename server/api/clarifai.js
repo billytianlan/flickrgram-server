@@ -26,22 +26,14 @@ let connectClarifai = (key) => {
 
         _.each(tagsArray, (tag) => {
           Tag.findOrCreate({
-            name: tag
-          })
-          .fetch()
-          .then((found) => {
-            if (!found) {
-              new Tag({ name: tag }).save()
-              .then((newTag) => {
-                console.log('crated new tag:', tag)
-                return newTag.photos().attach(photo.id)
-              })
-            } else {
-              console.log('we already have this tag');
+            where: {
+              name: tag
             }
           })
-          .catch((err) => {
-            throw err;
+          .spread((newTag, created) => {
+            console.log('crated new tag:', tag)
+            console.log('photo');
+            newTag.addPhoto(photo);
           })
         })
       })
