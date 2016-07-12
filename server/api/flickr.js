@@ -4,18 +4,7 @@ let Photo = require('../db/db').Photo
 let clarifai = require('./clarifai');
 require('dotenv').config();
 
-let connectFlickr = (key) => {
-
-  let options = {
-    'method': 'GET',
-    'uri': 'https://api.flickr.com/services/rest/',
-    'qs': {
-      'method': 'flickr.interestingness.getList',
-      'api_key': key,
-      'format': 'json',
-      'nojsoncallback': '1'
-    }
-  };
+let connectFlickr = (options) => {
 
   request(options, (err, res, body) => {
     let photosArray = JSON.parse(body).photos.photo;
@@ -40,5 +29,20 @@ let connectFlickr = (key) => {
   });
 }
 
-connectFlickr(process.env.FLICKR_KEY)
+let options = {
+  'method': 'GET',
+  'uri': 'https://api.flickr.com/services/rest/',
+  'qs': {
+    'method': 'flickr.interestingness.getList',
+    'api_key': process.env.FLICKR_KEY,
+    'format': 'json',
+    'nojsoncallback': '1'
+  }
+};
+
+module.exports = {
+  connectFlickr: connectFlickr
+}
+
+connectFlickr(options)
 
