@@ -5,7 +5,6 @@ let _ = require('underscore');
 require('dotenv').config();
 
 
-console.log(process.env.CLARIFAI_KEY);
 let connectClarifai = (key) => {
   Photo.findAll()
   .then((photos) => {

@@ -14,6 +14,7 @@ let findTags = (req, res) => {
         res.send(photos);
       })
     } else {
+      res.end();
       console.log('cant find that tag');
     }
   })
