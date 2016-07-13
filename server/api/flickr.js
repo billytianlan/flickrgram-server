@@ -35,14 +35,11 @@ let options = {
   'qs': {
     'method': 'flickr.interestingness.getList',
     'api_key': process.env.FLICKR_KEY,
+    'per_page': '200',
     'format': 'json',
     'nojsoncallback': '1'
   }
 };
-
-module.exports = {
-  connectFlickr: connectFlickr
-}
 
 connectFlickr(options)
 
